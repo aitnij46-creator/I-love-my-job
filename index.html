@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio ของฉัน - นักเรียนชั้นมัธยมปลาย</title>
+    <style>
+        /* --- ตั้งค่าพื้นฐาน (Global Styles) --- --> */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* --- ส่วนเมนูด้านบน (Navbar) --- --> */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        /* --- ส่วนต้อนรับ (Hero Section) --- --> */
+        #hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        #hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: #e74c3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #c0392b;
+        }
+
+        /* --- ส่วนเนื้อหาทั่วไป (Sections Common Style) --- --> */
+        section {
+            padding: 100px 20px 80px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+
+        /* --- ส่วนเกี่ยวกับฉัน (About Section) --- --> */
+        #about p {
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+        }
+
+        /* --- ส่วนผลงาน/กิจกรรม (Projects Section) --- --> */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+
+        .project-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* --- ส่วนติดต่อ (Contact Section) --- --> */
+        #contact {
+            text-align: center;
+        }
+
+        .contact-info {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .contact-info p {
+            margin: 10px 0;
+        }
+
+        /* --- ส่วนท้ายเว็บ (Footer) --- --> */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= ส่วนเมนูด้านบน ================= -->
+    <header>
+        <nav>
+            <div class="logo">My Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#hero">หน้าหลัก</a></li>
+                <li><a href="#about">เกี่ยวกับฉัน</a></li>
+                <li><a href="#projects">ผลงาน</a></li>
+                <li><a href="#contact">ติดต่อ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ================= ส่วนต้อนรับ (Hero) ================= -->
+    <section id="hero">
+        <h1>สวัสดีค่ะฉันชื่อ ปุ๊ก</h1>
+        <p>นักเรียนชั้นมัธยมปลาย โรงเรียนธัญบุรี</p>
+        <a href="#projects" class="btn">ดูผลงานของฉัน</a>
+    </section>
+
+    <!-- ================= ส่วนเกี่ยวกับฉัน (About) ================= -->
+    <section id="about">
+        <h2>เกี่ยวกับฉัน</h2>
+        <p>
+            สวัสดีค่ะ เป็นนักเรียนชั้นมัธยมศึกษาปีที่ 5 แผนการเรียน สายวิทคอม
+            มีความสนใจในด้าน ภาษา 
+            ชื่นชอบการเรียนรู้สิ่งใหม่ๆ และต้องการสะสมประสบการณ์เพื่อศึกษาต่อในระดับมหาวิทยาลัยค่ะ
+            <img src="rjv0hk.png" alt="">
+        </p>
+    </section>
+
+    <!-- ================= ส่วนผลงาน (Projects) ================= -->
+    <section id="projects">
+        <h2>ผลงานและกิจกรรม</h2>
+        <div class="project-grid">
+            <!-- ผลงานที่ 1 -->
+            <div class="project-card">
+                <h3>ชื่อผลงาน / โครงงานที่ 1</h3>
+                <img src="uuuuuuuuu.png" alt="" srcset="">
+                <p>อธิบายรายละเอียดสั้นๆ เกี่ยวกับผลงาน ชิ้นนี้ เช่น การประกวดโครงงาน หรือกิจกรรมที่โรงเรียนจัดขึ้น</p>
+            </div>
+            <!-- ผลงานที่ 2 -->
+            <div class="project-card">
+                <h3>ชื่อเกียรติบัตร / ค่ายที่เคยเข้าร่วม 2</h3>
+                <p>อธิบายรายละเอียดสั้นๆ เกี่ยวกับค่ายวิชาการ หรือเกียรติบัตรสำคัญที่คุณได้รับ</p>
+            </div>
+            <!-- ผลงานที่ 3 -->
+            <div class="project-card">
+                <h3>ผลงานจิตอาสา / กิจกรรมชมรม </h3>
+                <img src="oooooooooogggggggg.png" alt="">
+                <p>ฝึกการเป็นขโมยและสร้างบ้านในกระดองเต่า</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ส่วนติดต่อ (Contact) ================= -->
+    <section id="contact">
+        <h2>ช่องทางการติดต่อ</h2>
+        <div class="contact-info">
+            <p>อีเมล: ptoj.email@example.com</p>
+            <p>เบอร์โทรศัพท์: 08X-XXX-XXXX</p>
+            <p>Instagram / Line: @yourname</p>
+        </div>
+    </section>
+
+    <!-- ================= ส่วนท้ายเว็บ (Footer) ================= -->
+    <footer>
+        <p>&copy; 2026 [ปุ๊ก]. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
