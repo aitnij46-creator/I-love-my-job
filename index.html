@@ -19,6 +19,37 @@
             background-color: #f9f9f9;
         }
 
+        /* --- Loading State --- */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* --- ส่วนเมนูด้านบน (Navbar) --- */
         header {
             position: fixed;
@@ -122,6 +153,18 @@
             max-width: 700px;
             margin: 0 auto;
             color: #666;
+            line-height: 1.8;
+        }
+        
+        .skills-tag {
+            display: inline-block;
+            background: #ecf0f1;
+            color: #2c3e50;
+            padding: 5px 15px;
+            border-radius: 15px;
+            margin: 5px;
+            font-size: 0.9rem;
+            font-weight: bold;
         }
 
         /* --- ส่วนผลงาน/กิจกรรม (Projects Section) --- */
@@ -134,46 +177,48 @@
         .project-card {
             background: white;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
         }
 
         .project-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
         }
-
+        
         .project-card img {
             width: 100%;
-            height: 180px;
+            height: 150px;
             object-fit: cover;
-            border-radius: 6px;
+            border-radius: 8px;
             margin-bottom: 15px;
         }
 
         .project-card h3 {
-            margin-bottom: 5px;
-            color: #3498db;
-        }
-
-        .project-card .role {
-            font-size: 0.85rem;
-            color: #e74c3c;
-            font-weight: bold;
             margin-bottom: 10px;
+            color: #3498db;
+            font-size: 1.2rem;
+        }
+        
+        .project-card .role {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
         }
 
         .project-card p {
             color: #666;
             font-size: 0.95rem;
-            margin-bottom: 15px;
             flex-grow: 1;
         }
-
+        
         .project-card .date {
-            font-size: 0.8rem;
+            margin-top: 15px;
+            font-size: 0.85rem;
             color: #999;
             text-align: right;
         }
@@ -186,6 +231,12 @@
         .contact-info {
             font-size: 1.1rem;
             color: #555;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         .contact-info p {
@@ -200,47 +251,15 @@
             color: white;
             font-size: 0.9rem;
         }
-
-        /* --- Loading State Styles --- */
-        .loading-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            transition: opacity 0.5s ease;
-        }
-
-        .spinner {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
     </style>
 </head>
 <body>
 
-    <!-- ================= Loading Screen ================= -->
-    <div id="loading" class="loading-overlay">
+    <!-- ================= สถานะกำลังโหลด (Loading State) ================= -->
+    <div id="loading-overlay">
         <div class="spinner"></div>
-        <h3 style="color: #2c3e50;">กำลังโหลดข้อมูล...</h3>
+        <h2 style="color: #3498db;">กำลังดึงข้อมูล...</h2>
+        <p style="color: #7f8c8d; margin-top: 10px;">Please wait</p>
     </div>
 
     <!-- ================= ส่วนเมนูด้านบน ================= -->
@@ -258,8 +277,8 @@
 
     <!-- ================= ส่วนต้อนรับ (Hero) ================= -->
     <section id="hero">
-        <h1 id="hero-title">สวัสดีค่ะฉันชื่อ ...</h1>
-        <p id="hero-subtitle">กำลังโหลดข้อมูลตำแหน่ง...</p>
+        <h1 id="hero-title">สวัสดีครับ</h1>
+        <p id="hero-subtitle">กำลังโหลดข้อมูลส่วนตัว...</p>
         <a href="#projects" class="btn">ดูผลงานของฉัน</a>
     </section>
 
@@ -267,7 +286,7 @@
     <section id="about">
         <h2>เกี่ยวกับฉัน</h2>
         <div id="about-content">
-            <!-- ข้อมูลจะถูกแทรกที่นี่ด้วย JavaScript -->
+            <p>กำลังโหลดข้อมูล...</p>
         </div>
     </section>
 
@@ -275,7 +294,7 @@
     <section id="projects">
         <h2>ผลงานและกิจกรรม</h2>
         <div class="project-grid" id="project-container">
-            <!-- ข้อมูลโปรเจกต์จะถูกแทรกที่นี่ด้วย JavaScript -->
+            <!-- ข้อมูล Project จะถูกเพิ่มลงมาตรงนี้ด้วย JavaScript -->
         </div>
     </section>
 
@@ -283,141 +302,107 @@
     <section id="contact">
         <h2>ช่องทางการติดต่อ</h2>
         <div class="contact-info">
-            <p>อีเมล: ptoj.email@example.com</p>
-            <p>เบอร์โทรศัพท์: 08X-XXX-XXXX</p>
-            <p>Instagram / Line: @yourname</p>
+            <p><strong>อีเมล:</strong> student.cstu@example.com</p>
+            <p><strong>มหาวิทยาลัย:</strong> มหาวิทยาลัยธรรมศาสตร์</p>
+            <p><strong>LinkedIn:</strong> linkedin.com/in/cstu-student</p>
         </div>
     </section>
 
     <!-- ================= ส่วนท้ายเว็บ (Footer) ================= -->
     <footer>
-        <p>&copy; 2026 [<span id="footer-name">Your Name</span>]. All rights reserved.</p>
+        <p id="footer-text">&copy; 2026 My Portfolio. All rights reserved.</p>
     </footer>
 
-    <!-- ================= JavaScript สำหรับ Data Fetching ================= -->
+    <!-- ================= JavaScript ส่วนดึงข้อมูล (Fetch API) ================= -->
     <script>
-        // ข้อมูล JSON ตามตัวอย่างที่ต้องการ
-        const mockApiResponse = {
-            "profile": {
-                "name": "Anonymous CSTU Student",
-                "nickname": "Student",
-                "university": "Thammasat University",
-                "faculty": "Science and Technology",
-                "major": "Computer Science (CSTU)",
-                "job": "Undergraduate Student",
-                "skills": "Python, Java, React, Node.js, SQL"
-            },
-            "portfolio": [
-                {
-                    "id": 1,
-                    "title": "CSTU Course Registration Mockup",
-                    "role": "Frontend Developer",
-                    "description": "โปรเจควิชา Software Engineering จำลองระบบลงทะเบียนเรียนสำหรับนักศึกษาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยธรรมศาสตร์",
-                    "date": "May 2026",
-                    "image_url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80"
-                },
-                {
-                    "id": 2,
-                    "title": "CSTU Byenior 2026",
-                    "role": "Event Staff",
-                    "description": "ทีมงานฝ่ายสถานที่และดูแลระบบลงทะเบียนเข้างานบายเนียร์ของสาขาวิทยาการคอมพิวเตอร์",
-                    "date": "May 2026",
-                    "image_url": "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=600&q=80"
-                },
-                {
-                    "id": 3,
-                    "title": "Data Structures & Algorithms Tutor",
-                    "role": "Volunteer Tutor",
-                    "description": "จัดติววิชาโครงสร้างข้อมูลและอัลกอริทึมให้กับรุ่นน้องปี 2 ก่อนสอบมิดเทอม",
-                    "date": "Oct 2025",
-                    "image_url": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80"
-                }
-            ]
-        };
+        // กำหนด URL ของ API
+        const API_URL = "https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQjJjTnUXHrUmr0ld8T1hpAzveZjjsCu2-2bJYhUpfpoaQ8iUc_9Cud7JwGrlv291aAxtmf6BKxFGwfKX-va7WTgVkkIqVe2t-RaR2efhGh7dz7Tk251x9boflKyT_q1tayA2xBUpdHK0pKFw0yzZVkn7f-uTPoUGZHp007M50FPu9Q0Lrx6W4Y-50x53VgEqwbN6Nko-xjxH3gNxcacabsMUyMH31glPm_k_T7OJPEO0_oObou5sbPHS2lYOoVDRSQ1iCl-gVUit-0pmhu4hM00l0T6g&lib=MpViWapBtc_rsRZDTeOxmOn_7aa2EMzbp";
 
-        // ฟังก์ชันหลักสำหรับ Fetch ข้อมูล
-        async function fetchPortfolioData() {
+        // ฟังก์ชันสำหรับดึงและแสดงผลข้อมูล
+        async function fetchAndRenderData() {
             try {
-                // หากคุณมี URL จริง ให้ยกเลิกคอมเมนต์ด้านล่างนี้และลบการใช้ mockApiResponse ออก
-                /*
-                const API_URL = 'https://api.example.com/portfolio-data';
+                // 1. ดึงข้อมูลจาก API
                 const response = await fetch(API_URL);
-                if (!response.ok) throw new Error('Network response was not ok');
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
                 const data = await response.json();
-                */
 
-                // จำลองการดึงข้อมูล (Delay 1 วินาทีเพื่อให้เห็น Loading Animation)
-                const data = await new Promise(resolve => {
-                    setTimeout(() => resolve(mockApiResponse), 1000);
-                });
-
-                // นำข้อมูลไป Render ลง DOM
+                // 2. นำข้อมูลไปอัปเดตบนหน้าเว็บ (DOM Manipulation)
                 renderProfile(data.profile);
                 renderPortfolio(data.portfolio);
 
-                // ปิดหน้า Loading หลังจากเตรียมข้อมูลเสร็จ
+                // 3. ปิดหน้าจอ Loading เมื่อดึงข้อมูลและจัดการเสร็จแล้ว
                 hideLoading();
 
             } catch (error) {
-                console.error("Error fetching data:", error);
-                document.getElementById('loading').innerHTML = '<h3 style="color: red;">เกิดข้อผิดพลาดในการโหลดข้อมูล</h3>';
+                console.error("Error fetching data: ", error);
+                alert("เกิดข้อผิดพลาดในการดึงข้อมูล กรุณารีเฟรชหน้าเว็บใหม่อีกครั้ง");
+                hideLoading();
             }
         }
 
-        // ฟังก์ชันอัปเดตข้อมูลโปรไฟล์ (Hero & About)
+        // ฟังก์ชันอัปเดตข้อมูลส่วนตัว
         function renderProfile(profile) {
             // อัปเดต Hero Section
-            document.getElementById('hero-title').innerText = `สวัสดีค่ะฉันชื่อ ${profile.nickname}`;
-            document.getElementById('hero-subtitle').innerText = `${profile.job} | ${profile.university}`;
+            document.getElementById("hero-title").innerText = `สวัสดีครับ ผม ${profile.nickname}`;
+            document.getElementById("hero-subtitle").innerText = `${profile.job} | ${profile.university}`;
 
             // อัปเดต About Section
-            const aboutContent = `
+            // แยก Skills ออกมาเพื่อทำเป็น Tag สวยๆ
+            const skillsHtml = profile.skills.split(',').map(skill => `<span class="skills-tag">${skill.trim()}</span>`).join('');
+            
+            document.getElementById("about-content").innerHTML = `
                 <p>
-                    สวัสดีค่ะ ฉันชื่อ <strong>${profile.name}</strong> (ชื่อเล่น: ${profile.nickname})<br>
-                    ปัจจุบันกำลังศึกษาในระดับ <strong>${profile.job}</strong><br>
-                    คณะ${profile.faculty} สาขา${profile.major} ที่ ${profile.university}
-                </p>
-                <p style="margin-top: 15px;">
-                    <strong>ทักษะที่สนใจ:</strong> ${profile.skills}
+                    สวัสดีครับ ผมชื่อ <strong>${profile.name}</strong> (ชื่อเล่น: ${profile.nickname})<br><br>
+                    ปัจจุบันกำลังศึกษาอยู่ที่ <strong>${profile.university}</strong><br>
+                    คณะ <strong>${profile.faculty}</strong> สาขา <strong>${profile.major}</strong><br><br>
+                    มีความหลงใหลในการพัฒนาซอฟต์แวร์และเรียนรู้เทคโนโลยีใหม่ๆ อยู่เสมอ<br><br>
+                    <div style="text-align:center; margin-top: 20px;">
+                        <strong>ทักษะความสามารถ (Skills):</strong><br>
+                        <div style="margin-top: 10px;">${skillsHtml}</div>
+                    </div>
                 </p>
             `;
-            document.getElementById('about-content').innerHTML = aboutContent;
 
-            // อัปเดต Footer
-            document.getElementById('footer-name').innerText = profile.name;
+            // อัปเดตชื่อใน Footer
+            document.getElementById("footer-text").innerHTML = `&copy; ${new Date().getFullYear()} ${profile.name}. All rights reserved.`;
+            document.title = `Portfolio - ${profile.name}`;
         }
 
-        // ฟังก์ชันอัปเดตข้อมูลผลงาน (Portfolio Grid)
-        function renderPortfolio(portfolioList) {
-            const container = document.getElementById('project-container');
-            container.innerHTML = ''; // เคลียร์ของเก่าทิ้ง
+        // ฟังก์ชันอัปเดตผลงาน
+        function renderPortfolio(portfolioItems) {
+            const container = document.getElementById("project-container");
+            container.innerHTML = ""; // ล้างข้อมูลเดิมทิ้งก่อน
 
-            portfolioList.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'project-card';
+            portfolioItems.forEach(item => {
+                // สร้าง HTML Element สำหรับแต่ละการ์ดผลงาน
+                const card = document.createElement("div");
+                card.className = "project-card";
                 card.innerHTML = `
-                    <img src="${item.image_url}" alt="${item.title}">
+                    <img src="${item.image_url}" alt="${item.title}" loading="lazy">
                     <h3>${item.title}</h3>
-                    <div class="role"><i class="fas fa-user-tag"></i> ${item.role}</div>
+                    <div class="role">Role: ${item.role}</div>
                     <p>${item.description}</p>
-                    <div class="date">📅 ${item.date}</div>
+                    <div class="date">${item.date}</div>
                 `;
                 container.appendChild(card);
             });
         }
 
-        // ฟังก์ชันซ่อนหน้า Loading
+        // ฟังก์ชันซ่อนหน้าจอ Loading
         function hideLoading() {
-            const loadingEl = document.getElementById('loading');
-            loadingEl.classList.add('hidden');
-            // ลบ element ออกจาก DOM ไปเลยหลัง transition จบ (500ms) เพื่อไม่ให้ขวางการคลิก
+            const loadingOverlay = document.getElementById("loading-overlay");
+            loadingOverlay.style.opacity = "0";
+            // รอให้ Transition หายไปก่อนค่อยซ่อนจริงๆ
             setTimeout(() => {
-                loadingEl.style.display = 'none';
+                loadingOverlay.style.display = "none";
             }, 500);
         }
 
-        // เริ่มดึงข้อมูลเมื่อโหลดหน้าเว็บเสร็จ
-        window.addEventListener('DOMContentLoaded', fetchPortfolioData);
+        // เรียกใช้งานฟังก์ชันเมื่อโหลด DOM เสร็จสมบูรณ์
+        document.addEventListener("DOMContentLoaded", fetchAndRenderData);
     </script>
+
 </body>
 </html>
